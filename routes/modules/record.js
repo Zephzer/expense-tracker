@@ -20,4 +20,22 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const _id = req.params.id
+        const record = await Record.findOne({ _id }).lean()
+        res.render('edit', { record })
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+router.put('/:id', (req, res) => {
+    const _id = req.params.id
+    const info = req.body
+    Record.updateOne({ _id }, info)
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
+
 module.exports = router
