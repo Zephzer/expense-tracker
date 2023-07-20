@@ -18,6 +18,8 @@ require('./config/mongoose')
 app.engine('handlebars', exhbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use(express.static('public'))
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
