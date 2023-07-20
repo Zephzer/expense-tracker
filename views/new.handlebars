@@ -3,7 +3,7 @@
         <p>*必填欄位</p>
     <h2>請輸入你的支出</h2>
     </div>
-    <form action="/expense" method="POST">
+    <form action="/record" method="POST">
     <div>
         <div>
             <label class="form-label" for="name" >*名稱:</label>
@@ -25,8 +25,8 @@
             </select>
         </div>
         <div>
-            <label class="form-label" for="money">*金額:</label>
-            <input class="mt-2 form-control" type="number" placeholder="" value="" name="money" maxlength="10" required>
+            <label class="form-label" for="amount">*金額:</label>
+            <input class="mt-2 form-control" type="number" placeholder="" value="" name="amount" maxlength="10" required>
         </div>
         <button type="submit" class="btn btn-primary mt-2">新增支出</button>
     </div>

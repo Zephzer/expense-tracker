@@ -3,12 +3,11 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-let totalAmount = 0
 
 router.get('/', async (req, res) => {
     try {
+        let totalAmount = 0
         const records = await Record.find().lean().sort({ date: 'desc' })
-        console.log(records)
         await Promise.all(
             records.map(async (record) => {
                 const category = await Category.find({ categoryName: record.category }).lean()
