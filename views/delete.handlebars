@@ -1,0 +1,25 @@
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-dark">
+            <div style="display:flex; justify-content:space-between">
+                <i class="{{ record.image }} pt-3"></i>
+                <h6 class="pt-2">{{ record.name }}</h6>
+                <p class="pt-1">{{ record.date }}</p>
+                <p class="pt-2">${{ record.amount }} </p>
+            </div>
+        </li>
+    </ul>
+
+    <form action="/record/{{ record._id }}?_method=DELETE" method="POST" style="display:inline;"
+        id="deleteForm">
+        <div class="card">
+            <div class="card-body" style="display: flex; align-self: center; flex-direction:column">
+                <h5 class="card-title">確定要刪除嗎?</h5>
+                <div>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a href="/" class="btn btn-primary">No</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

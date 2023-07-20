@@ -30,12 +30,40 @@ router.get('/:id/edit', async (req, res) => {
     }
 })
 
-router.put('/:id', (req, res) => {
-    const _id = req.params.id
-    const info = req.body
-    Record.updateOne({ _id }, info)
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+router.put('/:id', async (req, res) => {
+    try {
+        const _id = req.params.id
+        const info = req.body
+        await Record.updateOne({ _id }, info)
+        res.redirect('/')
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+router.get('/:id/delete', async (req, res) => {
+    try {
+        const _id = req.params.id
+        const record = await Record.findOne({ _id }).lean()
+        const category = await Category.findOne({ categoryName: record.category }).lean()
+        record.image = category.image
+        res.render('delete', { record })
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const _id = req.params.id
+        const record = await Record.findOne({ _id })
+        if (record) {
+            await record.remove()
+        }
+        res.redirect('/')
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 module.exports = router
