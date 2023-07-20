@@ -10,7 +10,11 @@ router.get('/login', (req, res) => {
 })
 
 // login function
-
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureFlash: true
+}))
 
 // link to register page
 router.get('/register', (req, res) => {
