@@ -1,4 +1,6 @@
 const Record = require('../record')
+const bcrypt = require('bcryptjs')
+const User = require('../user')
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
@@ -38,12 +40,30 @@ const records = [
     }
 ]
 
+const SEED_USER = {
+    name: 'seed',
+    email: 'seed@seed',
+    password: '123456',
+}
+
 db.once('open', async () => {
     try {
-        await Record.create(records)
+        const salt = await bcrypt.genSalt(10)
+        const hash = await bcrypt.hash(SEED_USER.password, salt)
+        const user = await User.create({
+            name: SEED_USER.name,
+            email: SEED_USER.email,
+            password: hash
+        })
+        const userId = user._id
+        await Promise.all(records.map(async (record) => {
+            record.userId = userId
+            await Record.create(record)
+        }))
         console.log('done')
         process.exit()
-    } catch (error) {
-        console.error(error.message)
+    }
+    catch(err) {
+        console.log(err)
     }
 })
