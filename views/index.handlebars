@@ -1,14 +1,15 @@
 <div class="container" style="display: flex; flex-direction: column; max-width: 900px;">
     <div class="chooseInput mt-5">
         <form action="/search">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>類別...</option>
-                <option value="1">交通出行</option>
-                <option value="2">家居物業</option>
-                <option value="3">休閒娛樂</option>
-                <option value="4">餐飲食品</option>
-                <option value="5">其他</option>
+            <select class="form-select" aria-label="Default select example" name="keyword">
+                <option selected>選擇類別</option>
+                <option value="交通出行">交通出行</option>
+                <option value="家居物業">家居物業</option>
+                <option value="休閒娛樂">休閒娛樂</option>
+                <option value="餐飲食品">餐飲食品</option>
+                <option value="其他">其他</option>
             </select>
+            <button type="submit" class="btn btn-outline-dark mt-2">確定</button>
         </form>
     </div>
     <div class="total mt-5" style="display: flex; justify-content:space-between">
